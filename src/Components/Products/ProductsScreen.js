@@ -1,6 +1,7 @@
 // ProductsScreen.js
 
-import React from 'react';
+import React, { useContext } from 'react';
+import CartContext from '../../Store/CartContext';
 
 const productsArr = [
   {
@@ -21,6 +22,8 @@ const productsArr = [
 ];
 
 function ProductsScreen() {
+  const { addToCart } = useContext(CartContext);
+
   return (
     <div className="products-container">
       {productsArr.map((product, index) => (
@@ -28,6 +31,7 @@ function ProductsScreen() {
           <h3>{product.title}</h3>
           <p>Price: ${product.price}</p>
           <img src={product.imageUrl} alt={product.title} className="product-image" />
+          <button onClick={() => addToCart(product)}>Add to Cart</button>
         </div>
       ))}
     </div>
