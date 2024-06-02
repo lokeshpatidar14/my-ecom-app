@@ -1,24 +1,36 @@
 // App.js
 
-import React from 'react';
+import React from "react";
+import "./App.css";
+import Navbar from "./Components/Navbar/Navbar";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Shop from "./Pages/Shop";
+import Cart from "./Pages/Cart";
+import Product from "./Pages/Product";
+import LoginSignup from "./Pages/LoginSignup";
+import ShopCategory from "./Pages/ShopCategory";
+import Footer from "./Components/Footer/Footer";
 
-import ProductsScreen from './Components/Products/ProductsScreen';
-import Cart from './Components/Cart/Cart';
-import { CartProvider } from './Store/CartContext';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1>My Ecommerce App</h1>
-       
-      </header>
-      <main>
-        <CartProvider>
-        <Cart />
-          <ProductsScreen />
-        </CartProvider>
-      </main>
+    <div>
+      <BrowserRouter>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Shop />} />
+          <Route path="/mens" element={<ShopCategory category="men" />} />
+          <Route path="/womens" element={<ShopCategory category="women" />} />
+          <Route path="/kids" element={<ShopCategory category="kid" />} />
+          <Route path="product" element={<Product/>}>
+          <Route path=":productId" element={<Product/>}/>
+          </Route>
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/login" element={<LoginSignup />} />
+
+        </Routes>
+        <Footer/>
+      </BrowserRouter>
     </div>
   );
 }
